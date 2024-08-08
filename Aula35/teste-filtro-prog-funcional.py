@@ -1,23 +1,12 @@
 lista = [1,2,3,4,5,6,7,8,9,10]
 
-def impares( lista_numeros ):
-    lista_temp = []
-    for numero in lista_numeros:
-        if numero % 2 != 0:
-            lista_temp.append( numero )
-    return lista_temp
+def filtro_impar( numero):
+    if numero % 2 == 0:
+        return False
+    else:
+        return True
+    
+nova_lista = filter( filtro_impar, lista)
 
-def quadrado ( lista_numeros ):
-    lista_temp = []
-    for numero in lista_numeros:
-        lista_temp.append(numero * numero)
-    return lista_temp
-
-print("Lista de numeros: ")
-print( lista )
-print("Numeros impares: ")
-numeros_impares = impares( lista )
-print( numeros_impares )
-print("O quadrado dos numeros: ")
-numeros_quadrados = quadrado( lista )
-print( numeros_quadrados )
+print("lista: \n", lista)
+print("Numeros impares \n", list(nova_lista))
