@@ -6,6 +6,8 @@ from kivy.uix.button import Button
 
 class AppNome( App ):
 
+    agenda = []
+
     txt_nome = TextInput(size_hint=(0.7, 1.0))
     txt_telefone = TextInput(size_hint=(0.7, 1.0))
     txt_email = TextInput(size_hint=(0.7, 1.0))
@@ -13,10 +15,17 @@ class AppNome( App ):
 
     def submit(self, e):
         print("Botão pressionado")
-        print(self.txt_nome.text)
-        print(self.txt_telefone.text)
-        print(self.txt_email.text)
-        print(self.txt_nascimento.text)
+        obj_contato= {"nome":self.txt_nome.text,
+                      "telefone":self.txt_telefone.text,
+                      "email":self.txt_email.text,
+                      "nascimento":self.txt_nascimento.text}
+        
+        self.agenda.append(obj_contato)
+        self.txt_nome.text = ""
+        self.txt_telefone.text = ""
+        self.txt_email.text = ""
+        self.txt_nascimento.text = ""
+        print(obj_contato)
 
     def build(self):
         box = BoxLayout(orientation="vertical")
