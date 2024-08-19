@@ -1,7 +1,7 @@
 contador = 1
 
 class No:
-    lista = [x for x in range(100000000)]
+    lista = [x for x in range(10000000)]
     proximo = None
 
 if __name__ == "__main__":
