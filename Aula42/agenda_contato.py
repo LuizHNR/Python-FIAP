@@ -93,8 +93,8 @@ def gerar_tabela() -> bool:
 def ler_db( nome ):
     conexao = gerar_conexao_db()
     cursor = conexao.cursor()
-    sql = """SELECT * FROM agenda WHERE nome = :1"""
-    cursor.execute(sql, (nome, ))
+    sql = """SELECT * FROM agenda WHERE nome LIKE = :1"""
+    cursor.execute(sql, ("%" + nome + "%", ))
     
     for dados in cursor:
         print("Dados: ", dados)
