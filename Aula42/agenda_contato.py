@@ -90,21 +90,17 @@ def gerar_tabela() -> bool:
     conexao.close()
     return True
 
-def consultar():
-    print("Digite o nome que você desejar pesquisar: ")
-    
-    consultar_banco() 
-
-def consultar_banco():
+def ler_db( nome ):
     conexao = gerar_conexao_db()
     cursor = conexao.cursor()
-    nome = input()
-    conection = cursor.execute("SELECT * FROM agenda_pk WHERE nome= :nome" , {"nome": nome,} )
+    sql = """SELECT * FROM agenda WHERE nome = :1"""
+    cursor.execute(sql, (nome, ))
     
+    for dados in cursor:
+        print("Dados: ", dados)
     
+    conexao.close()
     
-
-
 def menu_principal():
     """
         Função para mostrar um menu principal na tela, 
@@ -174,7 +170,8 @@ if __name__ == "__main__":
             else:
                 print("Contato inválido")
         elif escolha == 'l':
-            consultar()
+            nome = input("Digite o nome que vc deseja pesquisar: ")
+            ler_db( nome )
         elif escolha == 's':
             executando = False
             print("Tchau até breve")
