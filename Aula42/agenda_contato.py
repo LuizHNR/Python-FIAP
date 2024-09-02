@@ -117,6 +117,29 @@ def ler_db( nome ):
         
     conexao.close()
     return resultado
+
+def remover():
+    nome = input("Digite o nome Completo que você deseja pesquisar: ")
+    remove = remover_db(nome)
+    if remove :
+        print("Contato removido com sucesso!!")
+    else:
+        print("Não foi encontrado esse usuario :(")
+
+def remover_db( nome ):
+    conexao = gerar_conexao_db()
+    cursor = conexao.cursor()
+    sql = """DELETE * FROM agenda WHERE nome = :1"""
+    try:
+        cursor.execute(sql, (nome,))
+        conexao.commit()
+        conexao.close()
+        return True
+    except Exception as err:
+        conexao.rollback()
+        conexao.close()
+        return False
+        
         
     
 def menu_principal():
@@ -128,16 +151,17 @@ def menu_principal():
         os.system("cls")
         print('''
             ------------------Menu----------------------
-            |      (G)erar a tabela no banco de dados   |
-            |      (C)adastrar                          |
-            |      (L)er Registro                       |
-            |      (S)air\n                             |
+                  (G)erar a tabela no banco de dados   
+                  (C)adastrar                          
+                  (L)er Registro                       
+                  (R)emover                          
+                  (S)air\n                             
             ---------------------------------------------
             ''')
 
         opcao = input("Escolha sua opção ==>")
         opcao_filtrada = opcao.lower()[0]
-        if opcao_filtrada in ['g', 'c', 'l', 's']:
+        if opcao_filtrada in ['g', 'c', 'l', 'r', 's']:
             return opcao_filtrada
         print("Opção é inválida, tecle <ENTER> para prosseguir")
         input()
@@ -189,6 +213,8 @@ if __name__ == "__main__":
                 print("Contato inválido")
         elif escolha == 'l':
             ler()
+        elif escolha == 'r':
+            remover()
         elif escolha == 's':
             executando = False
             print("Tchau até breve")
