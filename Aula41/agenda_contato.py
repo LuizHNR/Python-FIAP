@@ -12,9 +12,10 @@ def menuPrincipa():
       os.system("cls")
       print('''
             ----------Menu----------
-                  (C)adastrar
-                  (L)er Registro
-                  (S)air\n
+            |      (C)adastrar     |
+            |      (L)er Registro  |
+            |      (S)air\n        |
+            ------------------------
             ''')
     
       opcao = input("escolha a opção que desejar: ")[0].upper()
