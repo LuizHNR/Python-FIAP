@@ -100,7 +100,7 @@ def ler():
               Nome: {contato[0]} 
               Telefone: {contato[1]}
               Email: {contato[2]}
-              Nascimento: {contato[3]}
+              Nascimento: {contato[3].strftime("%d-%B-%Y")}
               --------------------------
               """)
     
