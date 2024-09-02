@@ -68,7 +68,7 @@ def gerar_tabela() -> bool:
     conexao = gerar_conexao_db()
     cursor = conexao.cursor()
     sql_drop = """DROP TABLE IF EXISTS agenda"""
-    sql_drop_constraint = """DROP CONTRAINT IF EXISTS Contato_pk"""
+    sql_drop_constraint = """DROP CONSTRAINT IF EXISTS agenda_pk"""
     sql = """
         CREATE TABLE agenda (
             nome varchar2(100),
@@ -79,8 +79,8 @@ def gerar_tabela() -> bool:
         )
         """
     try:
-        # cursor.execute(sql_drop)
-        # cursor.execute(sql_drop_constraint)
+        cursor.execute(sql_drop)
+        cursor.execute(sql_drop_constraint)
         cursor.execute(sql)
         conexao.commit()
     except Exception as err:
@@ -98,12 +98,14 @@ def menu_principal():
     """
     while True:
         os.system("cls")
-        print("Programa Agenda de Contatos\n")
-        print("Menu de opções:")
-        print("(G)erar a tabela no banco de dados")
-        print("(C)adastrar")
-        print("(L)er registros")
-        print("(S)air")
+        print('''
+            ------------------Menu----------------------
+            |      (G)erar a tabela no banco de dados   |
+            |      (C)adastrar                          |
+            |      (L)er Registro                       |
+            |      (S)air\n                             |
+            ---------------------------------------------
+            ''')
 
         opcao = input("Escolha sua opção ==>")
         opcao_filtrada = opcao.lower()[0]
