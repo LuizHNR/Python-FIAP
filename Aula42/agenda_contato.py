@@ -90,16 +90,34 @@ def gerar_tabela() -> bool:
     conexao.close()
     return True
 
+def ler():
+    nome = input("Digite o nome que você deseja pesquisar: ")
+    lista = ler_db( nome )
+    
+    for contato in lista:
+        print(f"""
+              --------Contato-----------
+              Nome: {contato[0]} 
+              Telefone: {contato[1]}
+              Email: {contato[2]}
+              Nascimento: {contato[3]}
+              --------------------------
+              """)
+    
+
 def ler_db( nome ):
     conexao = gerar_conexao_db()
     cursor = conexao.cursor()
-    sql = """SELECT * FROM agenda WHERE nome LIKE = :1"""
+    sql = """SELECT * FROM agenda WHERE nome LIKE :1"""
     cursor.execute(sql, ("%" + nome + "%", ))
     
+    resultado = []
     for dados in cursor:
-        print("Dados: ", dados)
-    
+        resultado.append(dados)
+        
     conexao.close()
+    return resultado
+        
     
 def menu_principal():
     """
@@ -170,8 +188,7 @@ if __name__ == "__main__":
             else:
                 print("Contato inválido")
         elif escolha == 'l':
-            nome = input("Digite o nome que vc deseja pesquisar: ")
-            ler_db( nome )
+            ler()
         elif escolha == 's':
             executando = False
             print("Tchau até breve")
