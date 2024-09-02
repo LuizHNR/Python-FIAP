@@ -90,6 +90,20 @@ def gerar_tabela() -> bool:
     conexao.close()
     return True
 
+def consultar():
+    print("Digite o nome que você desejar pesquisar: ")
+    
+    consultar_banco() 
+
+def consultar_banco():
+    conexao = gerar_conexao_db()
+    cursor = conexao.cursor()
+    nome = input()
+    conection = cursor.execute("SELECT * FROM agenda_pk WHERE nome= :nome" , {"nome": nome,} )
+    
+    
+    
+
 
 def menu_principal():
     """
@@ -159,6 +173,8 @@ if __name__ == "__main__":
                     print("\nErro ao cadatrar o contato")
             else:
                 print("Contato inválido")
+        elif escolha == 'l':
+            consultar()
         elif escolha == 's':
             executando = False
             print("Tchau até breve")
