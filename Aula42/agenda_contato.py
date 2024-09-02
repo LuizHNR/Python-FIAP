@@ -129,9 +129,9 @@ def remover():
 def remover_db( nome ):
     conexao = gerar_conexao_db()
     cursor = conexao.cursor()
-    sql = """DELETE * FROM agenda WHERE nome = :1"""
-    try:
-        cursor.execute(sql, (nome,))
+    sql = """DELETE FROM agenda WHERE nome = :1"""
+    try: 
+        cursor.execute(sql, (nome, ))
         conexao.commit()
         conexao.close()
         return True
