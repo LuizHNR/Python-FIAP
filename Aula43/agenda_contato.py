@@ -119,12 +119,16 @@ def remover_db( nome ):
         conexao.close()
         return False
         
-def autalizar_db( nome: str, contato: Contato ) -> bool:
+def atualizar_db( nome : str, contato: Contato ) -> bool:
     conexao = gerar_conexao_db()
     cursor = conexao.cursor()
-    sql = """UPDATE agenda SET nome = :1, telefone = :2, email = :3, nascimento = :4 WHERE nome = :5"""
+    sql = """UPDATE agenda SET telefone = :1, email = :2, nascimento = :3
+             WHERE nome = :4"""
     try:
-        cursor.execute(sql, (contato.nome, contato.telefone, contato.email, contato.nascimento))
+        cursor.execute(sql, (contato.telefone, 
+                             contato.email, 
+                             contato.nascimento,
+                             nome))
         conexao.commit()
     except Exception as err:
         print("Erro: ", err)
@@ -175,7 +179,7 @@ def atualizar():
             contato.telefone = telefone
             contato.email = email
             contato.nascimento = nascimento_date
-            autalizar_db(nome, contato)
+            resultado = atualizar_db(nome, contato)
             if resultado:
                 print("Contato atualizado com sucesso!!")
             else:
