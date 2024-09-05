@@ -5,6 +5,8 @@
 # Menu de opções:
 # 	(C)adastrar
 # 	(L)er registros
+# 	(R)emover
+# 	(A)tualizar
 # 	(S)air
 
 # Faça um código que repita as chamadas para esta função
@@ -90,21 +92,6 @@ def gerar_tabela() -> bool:
     conexao.close()
     return True
 
-def ler():
-    nome = input("Digite o nome que você deseja pesquisar: ")
-    lista = ler_db( nome )
-    
-    for contato in lista:
-        print(f"""
-              --------Contato-----------
-              Nome: {contato[0]} 
-              Telefone: {contato[1]}
-              Email: {contato[2]}
-              Nascimento: {contato[3].strftime("%d-%B-%Y")}
-              --------------------------
-              """)
-    
-
 def ler_db( nome ):
     conexao = gerar_conexao_db()
     cursor = conexao.cursor()
@@ -117,14 +104,6 @@ def ler_db( nome ):
         
     conexao.close()
     return resultado
-
-def remover():
-    nome = input("Digite o nome Completo que você deseja pesquisar: ")
-    remove = remover_db(nome)
-    if remove :
-        print("Contato removido com sucesso!!")
-    else:
-        print("Não foi encontrado esse usuario :(")
 
 def remover_db( nome ):
     conexao = gerar_conexao_db()
@@ -140,6 +119,74 @@ def remover_db( nome ):
         conexao.close()
         return False
         
+def autalizar_db( nome: str, contato: Contato ) -> bool:
+    conexao = gerar_conexao_db()
+    cursor = conexao.cursor()
+    sql = """UPDATE agenda SET nome = :1, telefone = :2, email = :3, nascimento = :4 WHERE nome = :5"""
+    try:
+        cursor.execute(sql, (contato.nome, contato.telefone, contato.email, contato.nascimento))
+        conexao.commit()
+    except Exception as err:
+        print("Erro: ", err)
+        conexao.rollback()
+        return False
+    conexao.close()
+    return True
+
+
+def ler():
+    nome = input("Digite o nome que você deseja pesquisar: ")
+    lista = ler_db( nome )
+    
+    for contato in lista:
+        print(f"""
+              --------Contato-----------
+              Nome: {contato[0]} 
+              Telefone: {contato[1]}
+              Email: {contato[2]}
+              Nascimento: {contato[3].strftime("%d-%B-%Y")}
+              --------------------------
+              """)
+    
+
+def remover():
+    nome = input("Digite o nome Completo que você deseja pesquisar: ")
+    remove = remover_db(nome)
+    if remove :
+        print("Contato removido com sucesso!!")
+    else:
+        print("Não foi encontrado esse usuario :(")
+
+def atualizar():
+    nome = input("Digite o nome Completo que você deseja atualizar: ")
+    
+    print("Agora digite as novas informação para este contato: ")
+    telefone = input("Telefone (DD)XXXXX-XXXX: ")
+    email = input("Email XXXXX@YYYY.ZZZ: ")
+    nascimento = input("Nascimento DD/MM/YYYY: ")
+    if  len(nome) > 5 and \
+        len(telefone) > 5 and \
+        len(email) > 5 and len(nascimento) == 10:
+        date_format = '%d/%m/%Y'
+        nascimento_date = datetime.strptime(nascimento, date_format)
+        if nascimento_date < datetime.now():
+            contato = Contato()
+            contato.nome = nome
+            contato.telefone = telefone
+            contato.email = email
+            contato.nascimento = nascimento_date
+            autalizar_db(nome, contato)
+            if resultado:
+                print("Contato atualizado com sucesso!!")
+            else:
+                print("Não foi encontrado esse usuario :(")
+            
+        else:
+            print("Data de nascimento incorreta")
+    else:        
+        print("Os valores precisam ser preenchidos com mais do que 5 caracteres em cada campo")
+    
+    
         
     
 def menu_principal():
@@ -154,14 +201,15 @@ def menu_principal():
                   (G)erar a tabela no banco de dados   
                   (C)adastrar                          
                   (L)er Registro                       
-                  (R)emover                          
+                  (R)emover
+                  (A)tualizar Registo                          
                   (S)air\n                             
             ---------------------------------------------
             ''')
 
         opcao = input("Escolha sua opção ==>")
         opcao_filtrada = opcao.lower()[0]
-        if opcao_filtrada in ['g', 'c', 'l', 'r', 's']:
+        if opcao_filtrada in ['g', 'c', 'l', 'r', 'a', 's']:
             return opcao_filtrada
         print("Opção é inválida, tecle <ENTER> para prosseguir")
         input()
@@ -200,8 +248,10 @@ if __name__ == "__main__":
     while executando:
         escolha = menu_principal()
         print(f"O usuário escolheu: {escolha}")
+        
         if escolha == 'g':
             gerar_tabela()
+            
         elif escolha == 'c':
             contato = cadastrar()
             if contato is not None:
@@ -211,10 +261,16 @@ if __name__ == "__main__":
                     print("\nErro ao cadatrar o contato")
             else:
                 print("Contato inválido")
+                
         elif escolha == 'l':
             ler()
+            
         elif escolha == 'r':
             remover()
+            
+        elif escolha == 'a':
+            atualizar()
+            
         elif escolha == 's':
             executando = False
             print("Tchau até breve")
