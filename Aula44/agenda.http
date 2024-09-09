@@ -29,3 +29,6 @@ Content-Type: application/json
 
 ###
 GET https://tdspm-luiz-default-rtdb.firebaseio.com/contatos.json HTTP/1.1
+
+###
+DELETE https://tdspm-luiz-default-rtdb.firebaseio.com/contatos/-O6Lee-ZxWhtpLep2p5g.json HTTP/1.1
