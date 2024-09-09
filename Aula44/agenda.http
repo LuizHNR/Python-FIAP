@@ -32,3 +32,13 @@ GET https://tdspm-luiz-default-rtdb.firebaseio.com/contatos.json HTTP/1.1
 
 ###
 DELETE https://tdspm-luiz-default-rtdb.firebaseio.com/contatos/-O6Lee-ZxWhtpLep2p5g.json HTTP/1.1
+
+###
+PUT https://tdspm-luiz-default-rtdb.firebaseio.com/contatos/-O6Lfb7ODOLnW0-1r5wz.json HTTP/1.1
+Content-Type: application/json
+
+{
+    "nome": "Erick Muito Gay",
+    "email": "erickmuitogay@teste.com",
+    "telefone": "(11) 9999-9999"
+}
