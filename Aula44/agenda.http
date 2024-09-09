@@ -6,3 +6,13 @@ Content-Type: application/json
     "email": "joao@teste.com",
     "telefone": "(11) 1111-1111"
 }
+
+###
+POST https://tdspm-luiz-default-rtdb.firebaseio.com/contatos.json HTTP/1.1
+Content-Type: application/json
+
+{
+    "nome": "Erick Gay",
+    "email": "erick@teste.com",
+    "telefone": "(11) 9999-9999"
+}
