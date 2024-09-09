@@ -26,3 +26,6 @@ Content-Type: application/json
     "email": "maria@teste.com",
     "telefone": "(11) 6666-6666"
 }
+
+###
+GET https://tdspm-luiz-default-rtdb.firebaseio.com/contatos.json HTTP/1.1
