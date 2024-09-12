@@ -1,11 +1,25 @@
 import os
+from controller import Controller
+from model import Contato
+from datetime import datetime
 
 class View:
     
     rodando = True
     
     def __init__(self):
-        pass
+        self.control = Controller()
+        
+    def ler_dados_contato(self):
+        print("Digite o nome do conbtato")
+        contato = Contato()
+        contato.nome = input("Nome: ")
+        contato.telefone = input("Telefone: ")
+        contato.email = input("Email: ")
+        str_nascimento = input("Nascimento: ")
+        contato.nascimento = datetime.strptime(str_nascimento, '%d/%m/%Y')
+        return contato
+        
     
     def menu_principal(self):
         os.system("CLS")
@@ -21,13 +35,14 @@ class View:
             opcao = opcao.upper()[0]
             match opcao:
                 case 'C':
-                    pass
+                    contato = self.ler_dados_contato()
+                    self.control.cadastrar( contato )
                 case 'P':
-                    pass
+                    self.control.pesquisar()
                 case 'R':
-                    pass
+                    self.control.remover()
                 case 'A':
-                    pass
+                    self.control.atualizar()
                 case 'S':
                     print("Até breve :) Obrigado por usar o sistema")
                     self.rodando = False
