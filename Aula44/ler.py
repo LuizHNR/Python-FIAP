@@ -3,7 +3,7 @@ import json
 
 url = "https://tdspm-luiz-default-rtdb.firebaseio.com/contatos.json"
 
-response = requests.get(url)
+response = requests.get(url, timeout=100 )
 
 texto =  response.text
 
