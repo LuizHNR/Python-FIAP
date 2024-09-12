@@ -10,11 +10,6 @@ class Contato:
     email = ""
     nascimento = datetime.now
     
-    def __str__(self):
-        return f"""()
-        """
-    
-    
     def __init__(self, contato_id="", nome="", telefone="", email="", nascimento=datetime.now):
         self.id = contato_id
         self.nome = nome
@@ -22,6 +17,13 @@ class Contato:
         self.email = email
         self.nascimento = nascimento
     
+    def __str__(self):
+        return f"""({self.contato_id}) - {self.nome}
+        {self.email}
+        {self.telefone}
+        {self.nascimento.strftime('%d/%m/%Y')}"""
+    
+  
 if __name__ == "__main__":
     date_time_str = "01/04/2003"
     nascimento = datetime.strptime(date_time_str, '%d/%m/%Y')
