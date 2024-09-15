@@ -49,7 +49,6 @@ def ler_tabela():
         print(time)
 
 cursor = con.cursor()
-cursor.execute(sql)
 con.commit()
 
 executar = True
