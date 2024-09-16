@@ -19,9 +19,9 @@ class MeuRequestHandler(BaseHTTPRequestHandler):
         
         self.wfile.write(b"Servidor de Numeros da Mega Sena")
         numeros = numeros_mega_sena()
-        self.wfile.write( b"" +  str(numeros) )
+        self.wfile.write( f"{numeros}".encode('utf-8') )
         
 print("----------------------Iniciando o servidor--------------------------")
 servidor = HTTPServer( ('127.0.0.1',80), MeuRequestHandler)
 print("aguardando conexão...")
-servidor.handle_request()
+servidor.serve_forever()
