@@ -14,6 +14,12 @@ class MeuRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         print("Cliente se conectou e pediu um GET")
         self.send_response(200)
+        self.send_header("content-type", "text/plain")
+        self.end_headers()
+        
+        self.wfile.write(b"Servidor de Numeros da Mega Sena")
+        numeros = numeros_mega_sena()
+        self.wfile.write( b"" +  str(numeros) )
         
 print("----------------------Iniciando o servidor--------------------------")
 servidor = HTTPServer( ('127.0.0.1',80), MeuRequestHandler)
