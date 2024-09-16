@@ -1,5 +1,5 @@
 from random import randint
-from http.server import BaseHTTPRequestHandler
+from http.server import BaseHTTPRequestHandler, HTTPServer
 
 def numeros_mega_sena():
     numeros = []
@@ -15,3 +15,7 @@ class MeuRequestHandler(BaseHTTPRequestHandler):
         print("Cliente se conectou e pediu um GET")
         self.send_response(200)
         
+print("----------------------Iniciando o servidor--------------------------")
+servidor = HTTPServer( ('127.0.0.1',80), MeuRequestHandler)
+print("aguardando conexão...")
+servidor.handle_request()
