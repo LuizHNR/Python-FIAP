@@ -1,4 +1,5 @@
 from random import randint
+from http.server import BaseHTTPRequestHandler
 
 def numeros_mega_sena():
     numeros = []
@@ -7,7 +8,10 @@ def numeros_mega_sena():
         if numero not in numeros:
             numeros.append(numero)
             i = i + 1
-    return numeros
+    return numeros       
+    
+class MeuRequestHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        print("Cliente se conectou e pediu um GET")
+        self.send_response(200)
         
-for i in range(20):
-    print(numeros_mega_sena())        
