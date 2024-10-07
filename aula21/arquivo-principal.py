@@ -1,8 +1,8 @@
-#MANEIRAS DE IMPORTAR
+import arquivo_funcoes as af
+print("Soma: ", af.somar(15, 13))
+print("Dividir: ", af.dividir(30, 7))
 
-#from arquivo_funcoes import somar, dividir
-#print(f"Soma: {somar(10,20)}")
-#print(f"Dividir: {dividir(20,10)}")
 
-#import arquivo_funcoes
-#print(f"Soma: {arquivo_funcoes.somar(10,20)}")
+# from arquivo_funcoes import somar, dividir
+# print("Soma: ", somar(15, 13))
+# print("Dividir: ", dividir(30, 7))

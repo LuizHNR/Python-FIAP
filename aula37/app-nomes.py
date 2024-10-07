@@ -6,26 +6,13 @@ from kivy.uix.button import Button
 
 class AppNome( App ):
 
-    agenda = []
-
     txt_nome = TextInput(size_hint=(0.7, 1.0))
     txt_telefone = TextInput(size_hint=(0.7, 1.0))
-    txt_email = TextInput(size_hint=(0.7, 1.0))
-    txt_nascimento = TextInput(size_hint=(0.7, 1.0))
 
     def submit(self, e):
         print("Botão pressionado")
-        obj_contato= {"nome":self.txt_nome.text,
-                      "telefone":self.txt_telefone.text,
-                      "email":self.txt_email.text,
-                      "nascimento":self.txt_nascimento.text}
-        
-        self.agenda.append(obj_contato)
-        self.txt_nome.text = ""
-        self.txt_telefone.text = ""
-        self.txt_email.text = ""
-        self.txt_nascimento.text = ""
-        print(obj_contato)
+        print(self.txt_nome.text)
+        print(self.txt_telefone.text)
 
     def build(self):
         box = BoxLayout(orientation="vertical")
@@ -33,22 +20,11 @@ class AppNome( App ):
                             size_hint = (1.0, 0.2))
         box_telefone = BoxLayout(orientation="horizontal",
                                 size_hint=(1.0, 0.2))
-    
-        box_email = BoxLayout(orientation="horizontal",
-                                size_hint=(1.0, 0.2))
         
-        box_nascimento = BoxLayout(orientation="horizontal",
-                                size_hint=(1.0, 0.2))
-
-        lbl_nome = Label(text="Nome:", 
+        lbl_nome = Label(text="Nome:",
                         size_hint = (0.3, 1.0))
+        self.txt_nome.hint_text = "Digite seu nome completo"
         lbl_telefone = Label(text="Telefone: ", 
-                            size_hint = (0.3, 1.0))
-        
-        lbl_email = Label(text="email: ", 
-                            size_hint = (0.3, 1.0))
-        
-        lbl_nascimento = Label(text="Data de nascimento: ", 
                             size_hint = (0.3, 1.0))
         
         btn_salvar = Button(text="Salvar", 
@@ -59,14 +35,8 @@ class AppNome( App ):
         box_nome.add_widget(self.txt_nome)
         box_telefone.add_widget(lbl_telefone)
         box_telefone.add_widget(self.txt_telefone)
-        box_email.add_widget(lbl_email)
-        box_email.add_widget(self.txt_email)
-        box_nascimento.add_widget(lbl_nascimento)
-        box_nascimento.add_widget(self.txt_nascimento)
         box.add_widget(box_nome)
         box.add_widget(box_telefone)
-        box.add_widget(box_email)
-        box.add_widget(box_nascimento)
         box.add_widget(btn_salvar)
         return box
     

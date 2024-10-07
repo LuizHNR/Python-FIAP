@@ -1,28 +1,49 @@
-def area_retangulo(b, a):
+def area_retangulo( b, a = 1 ):
+    """
+        Calcular a area do Retangulo
+        usando como formula area = base * altura
+    """
     area = b * a
-    return area
+    return area, b, a
 
-def area_triangulo(b, a):
+def area_triangulo( b = 1, a = 1 ):
+    """
+        Calcular a area do Triangulo
+        usando como formula area = base * altura / 2
+    """    
     area = b * a / 2
-    return area
+    return area, b, a
 
-print("PROGRAMA PARA CALCULAR AREAS")
+# Calcular area de retangulo
+# base * altura
 
-base = float(input("Informa o valor da base:\n"))
+# Calcular area do triangulo retangulo
+# base * altura / 2
 
-altura = float(input("Informe o valor da altura:\n"))
+print ("PROGRAMA PARA CALCULAR AREAS")
+
+print("Informe o valor da base==>")
+base = float(input())
+
+print("Informe o valor da altura==>")
+altura = float(input())
 
 menu = """
-Infome o tipo do objeto
+Informe o tipo do objeto
 (T)riangulo
 (R)etangulo
 """
-opcao = input(menu + "\nResposta:").lower()[0]
+print(menu)
+opcao = input().lower()[0]
 
 if opcao == 't':
-    resultado = area_triangulo(base, altura)
-    print("A area do triangulo é: ", resultado)
+    # resultado, b1, a1 = area_triangulo( a=altura )
+    # print("Base ==> ", b1)
+    # print("Altura ==> ", a1)
+    resultado, _, _ = area_triangulo(base)
 elif opcao == 'r':
-    resultado = area_retangulo(base, altura)
-    print("A area do retangulo é: ", resultado)
-
+    # resultado, b1, a1 = area_retangulo( base )
+    # print("Base ==> ", b1)
+    # print("Altura ==> ", a1)
+    resultado, _, _ = area_triangulo( a=altura )
+print("Area é igual a ==> ", resultado)

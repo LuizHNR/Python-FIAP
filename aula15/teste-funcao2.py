@@ -14,11 +14,12 @@ def somar_lista2():
         soma = soma + numero
     return soma
 
-def somar_lista(lista_origem ):
+def somar_lista( lista_origem ):
     soma = 0
     for numero in lista_origem:
         soma = soma + numero
     return soma
+
 
 executando = True
 while executando:
@@ -28,19 +29,21 @@ while executando:
         Calcular a (M)edia da Lista
         (X) Sair
         """
-    opcao = input(menu + "\nResposta:").upper()[0]
+    print(menu)
+    opcao = input().upper()[0]
 
     if opcao == 'S':
         # soma = 0
         # for i in range( 6 ):
         #     soma = soma + lista[i]
-        s = somar_lista(lista2)  # Quero somar os valores da lista2
+        s = somar_lista( lista2 )  # Quero somar os valores da lista2
         print( "Resultado da funcao somar_lista: ", s )
     elif opcao == 'M':
-        s = somar_lista(lista1)  # Fazer a média com os valores da lista1
+        s = somar_lista( lista1 )  # Fazer a média com os valores da lista1
         media = s / len(lista1)
         print("Media : ", media)
     elif opcao == 'X':
         print("Até breve ... !!!")
         executando = False
 print("Fim do programa")
+

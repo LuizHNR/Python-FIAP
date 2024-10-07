@@ -29,3 +29,5 @@ while executando:
     elif opcao == 'X':
         print("Até breve ... !!!")
         executando = False
+print("Fim do programa")
+

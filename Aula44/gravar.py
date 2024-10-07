@@ -1,11 +1,11 @@
 import requests
 
-url = "https://tdspm-luiz-default-rtdb.firebaseio.com/contatos.json"
+url = "https://tdspm-f7cb0-default-rtdb.firebaseio.com/contatos.json"
 
-contato = { "nome": "Alberto Santos",
-            "email": "alberto@teste",
-            "telefone": "11111-1111" 
+contato = { "nome": "Aberto Santos",
+            "telefone": "(13) 4444-4444",
+            "email": "alberto@teste.com"
         }
 
-response = requests.post(url, json=contato)
+response = requests.post( url, json=contato, timeout=100 )
 print(response)
