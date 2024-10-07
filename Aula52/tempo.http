@@ -1,0 +1,5 @@
+# GET https://api.weatherapi.com/v1/timezone.json?key=8eda3e30011b43f58e5120023240710
+
+#------------------------------------------------Time zone-----------------------------------------------
+
+GET https://api.weatherapi.com/v1/timezone.json?key=8eda3e30011b43f58e5120023240710&q=Sao Paulo HTTP/1.1
